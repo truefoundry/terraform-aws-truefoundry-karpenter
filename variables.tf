@@ -28,11 +28,6 @@ variable "controller_nodegroup_name" {
   type        = string
 }
 
-variable "account_name" {
-  description = "AWS Account Name"
-  type        = string
-}
-
 variable "tags" {
   type        = map(string)
   default     = {}

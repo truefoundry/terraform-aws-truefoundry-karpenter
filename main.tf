@@ -1,12 +1,7 @@
 # From https://github.com/terraform-aws-modules/terraform-aws-eks/blob/master/examples/irsa/irsa.tf
-
-data "aws_eks_cluster" "cluster" {
-  name = var.cluster_name
-}
-
 module "karpenter_irsa_role" {
-  source = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
-  version = "5.27.0"
+  source                             = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
+  version                            = "5.27.0"
   role_name                          = "${var.cluster_name}-karpenter"
   attach_karpenter_controller_policy = true
 
@@ -22,6 +17,7 @@ module "karpenter_irsa_role" {
       namespace_service_accounts = ["${var.k8s_service_account_namespace}:${var.k8s_service_account_name}"]
     }
   }
+  tags = local.tags
 }
 
 resource "aws_iam_instance_profile" "karpenter" {

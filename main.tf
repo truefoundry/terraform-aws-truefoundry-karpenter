@@ -23,4 +23,5 @@ module "karpenter_irsa_role" {
 resource "aws_iam_instance_profile" "karpenter" {
   name = "${var.cluster_name}-karpenter-${var.controller_nodegroup_name}"
   role = split("/", var.controller_node_iam_role_arn)[1]
+  tags = local.tags
 }

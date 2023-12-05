@@ -27,6 +27,17 @@ variable "controller_nodegroup_name" {
   description = "The initial nodegroup name"
   type        = string
 }
+variable "sqs_enable_encryption" {
+  description = "Enable Server side encryption for SQS"
+  type = bool
+  default = true
+}
+
+variable "message_retention_seconds" {
+  description = "Message retention in seconds for SQS queue"
+  type = number
+  default = 300
+}
 
 variable "tags" {
   type        = map(string)

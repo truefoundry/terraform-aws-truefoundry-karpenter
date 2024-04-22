@@ -11,7 +11,7 @@ module "karpenter_irsa_role" {
 
   attach_vpc_cni_policy = true
   vpc_cni_enable_ipv4   = true
-  
+
   role_policy_arns = {
     "sqs_policy" = aws_iam_policy.sqs.arn
   }

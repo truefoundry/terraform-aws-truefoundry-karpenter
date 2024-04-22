@@ -1,8 +1,8 @@
 resource "aws_sqs_queue" "karpenter" {
   name                      = "${var.cluster_name}-karpenter"
   message_retention_seconds = var.message_retention_seconds
-  sqs_managed_sse_enabled = var.sqs_enable_encryption
-  tags = local.tags
+  sqs_managed_sse_enabled   = var.sqs_enable_encryption
+  tags                      = local.tags
 }
 
 data "aws_iam_policy_document" "sqs" {

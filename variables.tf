@@ -19,8 +19,14 @@ variable "oidc_provider_arn" {
 }
 
 variable "controller_node_iam_role_arn" {
-  description = "The initial node iam role arn"
+  description = "The node iam role for the initial node group to be used by karpenter"
   type        = string
+}
+
+variable "additional_controller_node_iam_role_arns" {
+  description = "The additional node iam roles to be used by karpenter"
+  type        = list(string)
+  default     = []
 }
 
 variable "controller_nodegroup_name" {
@@ -29,14 +35,14 @@ variable "controller_nodegroup_name" {
 }
 variable "sqs_enable_encryption" {
   description = "Enable Server side encryption for SQS"
-  type = bool
-  default = true
+  type        = bool
+  default     = true
 }
 
 variable "message_retention_seconds" {
   description = "Message retention in seconds for SQS queue"
-  type = number
-  default = 300
+  type        = number
+  default     = 300
 }
 
 variable "tags" {

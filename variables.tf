@@ -18,9 +18,9 @@ variable "oidc_provider_arn" {
   type        = string
 }
 
-variable "controller_node_iam_role_arn" {
-  description = "The initial node iam role arn"
-  type        = string
+variable "controller_node_iam_role_arns" {
+  description = "The node iam role arns to support for karpenter"
+  type        = list(string)
 }
 
 variable "controller_nodegroup_name" {

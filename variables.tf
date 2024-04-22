@@ -18,9 +18,15 @@ variable "oidc_provider_arn" {
   type        = string
 }
 
-variable "controller_node_iam_role_arns" {
-  description = "The node iam role arns to support for karpenter"
+variable "controller_node_iam_role_arn" {
+  description = "The node iam role for the initial node group to be used by karpenter"
+  type        = string
+}
+
+variable "additional_controller_node_iam_role_arns" {
+  description = "The additional node iam roles to be used by karpenter"
   type        = list(string)
+  default = []
 }
 
 variable "controller_nodegroup_name" {

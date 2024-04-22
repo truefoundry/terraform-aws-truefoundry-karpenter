@@ -32,7 +32,7 @@ variable "controller_node_iam_role_arn" {
 variable "additional_controller_node_iam_role_arns" {
   description = "The additional node iam roles to be used by karpenter"
   type        = list(string)
-  default = []
+  default     = []
 }
 
 variable "controller_nodegroup_name" {

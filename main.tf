@@ -7,7 +7,7 @@ module "karpenter_irsa_role" {
   attach_karpenter_controller_policy = true
 
   karpenter_controller_cluster_id         = var.cluster_name
-  karpenter_controller_node_iam_role_arns = var.controller_node_iam_role_arns
+  karpenter_controller_node_iam_role_arns = flatten([var.controller_node_iam_role_arn, var.additional_controller_node_iam_role_arns])
 
   attach_vpc_cni_policy = true
   vpc_cni_enable_ipv4   = true

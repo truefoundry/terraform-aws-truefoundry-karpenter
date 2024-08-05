@@ -41,4 +41,10 @@ locals {
       }
     }
   }
+  karpenter_controller_role_policy_arns = merge(
+    {
+      "sqs_policy" = aws_iam_policy.sqs.arn
+    },
+    var.additional_controller_role_policies_arn
+  )
 }

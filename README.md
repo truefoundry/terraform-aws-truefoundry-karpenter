@@ -6,39 +6,40 @@ Truefoundry AWS Karpenter Module
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.4 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | 5.17.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.8 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | 5.61.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.17.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.61.0 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_karpenter_irsa_role"></a> [karpenter\_irsa\_role](#module\_karpenter\_irsa\_role) | terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks | 5.32.0 |
+| <a name="module_karpenter_irsa_role"></a> [karpenter\_irsa\_role](#module\_karpenter\_irsa\_role) | terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks | 5.42.0 |
 
 ## Resources
 
 | Name | Type |
 |------|------|
-| [aws_cloudwatch_event_rule.this](https://registry.terraform.io/providers/hashicorp/aws/5.17.0/docs/resources/cloudwatch_event_rule) | resource |
-| [aws_cloudwatch_event_target.this](https://registry.terraform.io/providers/hashicorp/aws/5.17.0/docs/resources/cloudwatch_event_target) | resource |
-| [aws_iam_instance_profile.karpenter](https://registry.terraform.io/providers/hashicorp/aws/5.17.0/docs/resources/iam_instance_profile) | resource |
-| [aws_iam_policy.sqs](https://registry.terraform.io/providers/hashicorp/aws/5.17.0/docs/resources/iam_policy) | resource |
-| [aws_sqs_queue.karpenter](https://registry.terraform.io/providers/hashicorp/aws/5.17.0/docs/resources/sqs_queue) | resource |
-| [aws_sqs_queue_policy.karpenter](https://registry.terraform.io/providers/hashicorp/aws/5.17.0/docs/resources/sqs_queue_policy) | resource |
-| [aws_iam_policy_document.node_termination_queue](https://registry.terraform.io/providers/hashicorp/aws/5.17.0/docs/data-sources/iam_policy_document) | data source |
-| [aws_iam_policy_document.sqs](https://registry.terraform.io/providers/hashicorp/aws/5.17.0/docs/data-sources/iam_policy_document) | data source |
+| [aws_cloudwatch_event_rule.this](https://registry.terraform.io/providers/hashicorp/aws/5.61.0/docs/resources/cloudwatch_event_rule) | resource |
+| [aws_cloudwatch_event_target.this](https://registry.terraform.io/providers/hashicorp/aws/5.61.0/docs/resources/cloudwatch_event_target) | resource |
+| [aws_iam_instance_profile.karpenter](https://registry.terraform.io/providers/hashicorp/aws/5.61.0/docs/resources/iam_instance_profile) | resource |
+| [aws_iam_policy.sqs](https://registry.terraform.io/providers/hashicorp/aws/5.61.0/docs/resources/iam_policy) | resource |
+| [aws_sqs_queue.karpenter](https://registry.terraform.io/providers/hashicorp/aws/5.61.0/docs/resources/sqs_queue) | resource |
+| [aws_sqs_queue_policy.karpenter](https://registry.terraform.io/providers/hashicorp/aws/5.61.0/docs/resources/sqs_queue_policy) | resource |
+| [aws_iam_policy_document.node_termination_queue](https://registry.terraform.io/providers/hashicorp/aws/5.61.0/docs/data-sources/iam_policy_document) | data source |
+| [aws_iam_policy_document.sqs](https://registry.terraform.io/providers/hashicorp/aws/5.61.0/docs/data-sources/iam_policy_document) | data source |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_additional_controller_node_iam_role_arns"></a> [additional\_controller\_node\_iam\_role\_arns](#input\_additional\_controller\_node\_iam\_role\_arns) | The additional node iam roles to be used by karpenter | `list(string)` | `[]` | no |
+| <a name="input_additional_controller_role_policies_arn"></a> [additional\_controller\_role\_policies\_arn](#input\_additional\_controller\_role\_policies\_arn) | arn of dditional policies to attach to the karpenter controller role (Example {'x-policy' = arn:aws:iam::123456789012:policy/x-policy}) | `any` | `{}` | no |
 | <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | Cluster Name to install karpenter | `string` | n/a | yes |
 | <a name="input_controller_node_iam_role_arn"></a> [controller\_node\_iam\_role\_arn](#input\_controller\_node\_iam\_role\_arn) | The node iam role for the initial node group to be used by karpenter | `string` | n/a | yes |
 | <a name="input_controller_nodegroup_name"></a> [controller\_nodegroup\_name](#input\_controller\_nodegroup\_name) | The initial nodegroup name | `string` | n/a | yes |

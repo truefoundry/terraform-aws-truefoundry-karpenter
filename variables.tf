@@ -3,6 +3,12 @@ variable "cluster_name" {
   type        = string
 }
 
+variable "additional_karpenter_controller_role_policies_arn" {
+  description = "arn of dditional policies to attach to the karpenter controller role (Example {'x-policy' = arn:aws:iam::123456789012:policy/x-policy})"
+  type        = any
+  default     = {}
+}
+
 variable "k8s_service_account_name" {
   description = "The k8s karpenter service account name"
   type        = string
@@ -27,16 +33,17 @@ variable "controller_nodegroup_name" {
   description = "The initial nodegroup name"
   type        = string
 }
+
 variable "sqs_enable_encryption" {
   description = "Enable Server side encryption for SQS"
-  type = bool
-  default = true
+  type        = bool
+  default     = true
 }
 
 variable "message_retention_seconds" {
   description = "Message retention in seconds for SQS queue"
-  type = number
-  default = 300
+  type        = number
+  default     = 300
 }
 
 variable "tags" {

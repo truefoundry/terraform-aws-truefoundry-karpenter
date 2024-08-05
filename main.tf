@@ -2,7 +2,7 @@
 
 module "karpenter_irsa_role" {
   source                             = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
-  version                            = "5.32.0"
+  version                            = "5.42.0"
   role_name                          = "${var.cluster_name}-karpenter"
   attach_karpenter_controller_policy = true
 
@@ -11,10 +11,8 @@ module "karpenter_irsa_role" {
 
   attach_vpc_cni_policy = true
   vpc_cni_enable_ipv4   = true
-  
-  role_policy_arns = {
-    "sqs_policy" = aws_iam_policy.sqs.arn
-  }
+
+  role_policy_arns = local.karpenter_controller_role_policy_arns
 
   oidc_providers = {
     main = {

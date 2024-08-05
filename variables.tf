@@ -29,10 +29,17 @@ variable "additional_controller_node_iam_role_arns" {
   default     = []
 }
 
+variable "additional_controller_role_policies_arn" {
+  description = "arn of dditional policies to attach to the karpenter controller role (Example {'x-policy' = arn:aws:iam::123456789012:policy/x-policy})"
+  type        = any
+  default     = {}
+}
+
 variable "controller_nodegroup_name" {
   description = "The initial nodegroup name"
   type        = string
 }
+
 variable "sqs_enable_encryption" {
   description = "Enable Server side encryption for SQS"
   type        = bool

@@ -7,13 +7,13 @@ Truefoundry AWS Karpenter Module
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.8 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | 5.61.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.57.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.61.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.57.0 |
 
 ## Modules
 
@@ -25,14 +25,14 @@ Truefoundry AWS Karpenter Module
 
 | Name | Type |
 |------|------|
-| [aws_cloudwatch_event_rule.this](https://registry.terraform.io/providers/hashicorp/aws/5.61.0/docs/resources/cloudwatch_event_rule) | resource |
-| [aws_cloudwatch_event_target.this](https://registry.terraform.io/providers/hashicorp/aws/5.61.0/docs/resources/cloudwatch_event_target) | resource |
-| [aws_iam_instance_profile.karpenter](https://registry.terraform.io/providers/hashicorp/aws/5.61.0/docs/resources/iam_instance_profile) | resource |
-| [aws_iam_policy.sqs](https://registry.terraform.io/providers/hashicorp/aws/5.61.0/docs/resources/iam_policy) | resource |
-| [aws_sqs_queue.karpenter](https://registry.terraform.io/providers/hashicorp/aws/5.61.0/docs/resources/sqs_queue) | resource |
-| [aws_sqs_queue_policy.karpenter](https://registry.terraform.io/providers/hashicorp/aws/5.61.0/docs/resources/sqs_queue_policy) | resource |
-| [aws_iam_policy_document.node_termination_queue](https://registry.terraform.io/providers/hashicorp/aws/5.61.0/docs/data-sources/iam_policy_document) | data source |
-| [aws_iam_policy_document.sqs](https://registry.terraform.io/providers/hashicorp/aws/5.61.0/docs/data-sources/iam_policy_document) | data source |
+| [aws_cloudwatch_event_rule.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_event_rule) | resource |
+| [aws_cloudwatch_event_target.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_event_target) | resource |
+| [aws_iam_instance_profile.karpenter](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_instance_profile) | resource |
+| [aws_iam_policy.sqs](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
+| [aws_sqs_queue.karpenter](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sqs_queue) | resource |
+| [aws_sqs_queue_policy.karpenter](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sqs_queue_policy) | resource |
+| [aws_iam_policy_document.node_termination_queue](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
+| [aws_iam_policy_document.sqs](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 
 ## Inputs
 

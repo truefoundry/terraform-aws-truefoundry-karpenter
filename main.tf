@@ -17,7 +17,7 @@ module "karpenter_irsa_role" {
   oidc_providers = {
     main = {
       provider_arn               = var.oidc_provider_arn
-      namespace_service_accounts = ["${var.k8s_service_account_namespace}:${var.k8s_service_account_name}"]
+      namespace_service_accounts = local.service_account_namespaces
     }
   }
   tags = local.tags

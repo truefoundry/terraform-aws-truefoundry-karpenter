@@ -19,7 +19,7 @@ Truefoundry AWS Karpenter Module
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_karpenter_irsa_role"></a> [karpenter\_irsa\_role](#module\_karpenter\_irsa\_role) | terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks | 5.42.0 |
+| <a name="module_karpenter_irsa_role"></a> [karpenter\_irsa\_role](#module\_karpenter\_irsa\_role) | terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks | 5.48.0 |
 
 ## Resources
 

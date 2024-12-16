@@ -2,7 +2,7 @@
 
 module "karpenter_irsa_role" {
   source                             = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
-  version                            = "5.42.0"
+  version                            = "5.48.0"
   role_name                          = "${var.cluster_name}-karpenter"
   attach_karpenter_controller_policy = true
 
@@ -17,7 +17,7 @@ module "karpenter_irsa_role" {
   oidc_providers = {
     main = {
       provider_arn               = var.oidc_provider_arn
-      namespace_service_accounts = ["${var.k8s_service_account_namespace}:${var.k8s_service_account_name}"]
+      namespace_service_accounts = local.service_account_namespaces
     }
   }
   tags = local.tags

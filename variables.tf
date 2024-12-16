@@ -6,11 +6,13 @@ variable "cluster_name" {
 variable "k8s_service_account_name" {
   description = "The k8s karpenter service account name"
   type        = string
+  default     = "karpenter"
 }
 
 variable "k8s_service_account_namespace" {
   description = "The k8s karpenter namespace"
   type        = string
+  default     = "kube-system"
 }
 
 variable "oidc_provider_arn" {

@@ -32,5 +32,5 @@ resource "aws_iam_instance_profile" "karpenter" {
 
 moved {
   from = module.karpenter_irsa_role
-  to = module.karpenter_irsa_role[0]
+  to   = module.karpenter_irsa_role[0]
 }

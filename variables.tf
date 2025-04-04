@@ -15,6 +15,18 @@ variable "k8s_service_account_namespace" {
   default     = "kube-system"
 }
 
+variable "create_karpenter_iam_role" {
+  description = "Enable/disable creation of IAM role for karpenter"
+  type        = bool
+  default     = true
+}
+
+variable "existing_karpenter_iam_role_arn" {
+  description = "ARN of the existing karpenter role. This will be used only when create_karpenter_iam_role is set to false"
+  type        = string
+  default     = ""
+}
+
 variable "oidc_provider_arn" {
   description = "The oidc provider  arn of the eks cluster"
   type        = string

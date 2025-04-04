@@ -28,7 +28,7 @@ variable "existing_karpenter_iam_role_arn" {
 }
 
 variable "existing_karpenter_instance_profile" {
-  description = "Instance profie for karpenter. This will be used only when create_karpenter_iam_role is set to false"
+  description = "Instance profile for karpenter. This will be used only when create_karpenter_iam_role is set to false"
   type        = string
   default     = ""
 }

@@ -19,7 +19,7 @@ Truefoundry AWS Karpenter Module
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_karpenter_irsa_role"></a> [karpenter\_irsa\_role](#module\_karpenter\_irsa\_role) | terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks | 5.48.0 |
+| <a name="module_karpenter_irsa_role"></a> [karpenter\_irsa\_role](#module\_karpenter\_irsa\_role) | terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks | 5.54.1 |
 
 ## Resources
 
@@ -43,6 +43,8 @@ Truefoundry AWS Karpenter Module
 | <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | Cluster Name to install karpenter | `string` | n/a | yes |
 | <a name="input_controller_node_iam_role_arn"></a> [controller\_node\_iam\_role\_arn](#input\_controller\_node\_iam\_role\_arn) | The node iam role for the initial node group to be used by karpenter | `string` | n/a | yes |
 | <a name="input_controller_nodegroup_name"></a> [controller\_nodegroup\_name](#input\_controller\_nodegroup\_name) | The initial nodegroup name | `string` | n/a | yes |
+| <a name="input_create_karpenter_iam_role"></a> [create\_karpenter\_iam\_role](#input\_create\_karpenter\_iam\_role) | Enable/disable creation of IAM role for karpenter | `bool` | `true` | no |
+| <a name="input_existing_karpenter_iam_role_arn"></a> [existing\_karpenter\_iam\_role\_arn](#input\_existing\_karpenter\_iam\_role\_arn) | ARN of the existing karpenter role. This will be used only when create\_karpenter\_iam\_role is set to false | `string` | `""` | no |
 | <a name="input_k8s_service_account_name"></a> [k8s\_service\_account\_name](#input\_k8s\_service\_account\_name) | The k8s karpenter service account name | `string` | `"karpenter"` | no |
 | <a name="input_k8s_service_account_namespace"></a> [k8s\_service\_account\_namespace](#input\_k8s\_service\_account\_namespace) | The k8s karpenter namespace | `string` | `"kube-system"` | no |
 | <a name="input_message_retention_seconds"></a> [message\_retention\_seconds](#input\_message\_retention\_seconds) | Message retention in seconds for SQS queue | `number` | `300` | no |

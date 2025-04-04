@@ -7,7 +7,7 @@ resource "aws_sqs_queue" "karpenter" {
 
 data "aws_iam_policy_document" "sqs" {
   statement {
-    resources = [aws_sqs_queue.karpenter[0].arn]
+    resources = [aws_sqs_queue.karpenter.arn]
     actions   = ["sqs:DeleteMessage", "sqs:GetQueueUrl", "sqs:GetQueueAttributes", "sqs:ReceiveMessage"]
     effect    = "Allow"
   }

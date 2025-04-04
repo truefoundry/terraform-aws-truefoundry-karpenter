@@ -42,9 +42,9 @@ locals {
     }
   }
   karpenter_controller_role_policy_arns = merge(
-    {
-      "sqs_policy" = aws_iam_policy.sqs.arn
-    },
+    var.create_karpenter_iam_role ? {
+      "sqs_policy" = aws_iam_policy.sqs[0].arn
+    } : {},
     var.additional_controller_role_policies_arn
   )
   service_account_namespaces = var.k8s_service_account_namespace == "karpenter" ? ["${var.k8s_service_account_namespace}:${var.k8s_service_account_name}"] : ["${var.k8s_service_account_namespace}:${var.k8s_service_account_name}", "karpenter:${var.k8s_service_account_name}"]

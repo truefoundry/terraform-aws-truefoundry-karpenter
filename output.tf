@@ -1,5 +1,5 @@
 output "karpenter_role_arn" {
-  value       = module.karpenter_irsa_role.iam_role_arn
+  value       = var.create_karpenter_iam_role ? module.karpenter_irsa_role[0].iam_role_arn : var.existing_karpenter_iam_role_arn
   description = "Karpenter role ARN"
 }
 

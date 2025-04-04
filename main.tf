@@ -1,8 +1,9 @@
 # From https://github.com/terraform-aws-modules/terraform-aws-eks/blob/master/examples/irsa/irsa.tf
 
 module "karpenter_irsa_role" {
+  count                              = var.create_karpenter_iam_role ? 1 : 0
   source                             = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
-  version                            = "5.48.0"
+  version                            = "5.54.1"
   role_name                          = "${var.cluster_name}-karpenter"
   attach_karpenter_controller_policy = true
 
@@ -27,4 +28,9 @@ resource "aws_iam_instance_profile" "karpenter" {
   name = "${var.cluster_name}-karpenter-${var.controller_nodegroup_name}"
   role = split("/", var.controller_node_iam_role_arn)[1]
   tags = local.tags
+}
+
+moved {
+  from = module.karpenter_irsa_role
+  to = module.karpenter_irsa_role[0]
 }

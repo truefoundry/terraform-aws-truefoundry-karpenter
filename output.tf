@@ -4,7 +4,7 @@ output "karpenter_role_arn" {
 }
 
 output "karpenter_instance_profile_id" {
-  value       = var.create_karpenter_iam_role ? aws_iam_instance_profile.karpenter.id : ""
+  value       = var.create_karpenter_iam_role ? aws_iam_instance_profile.karpenter[0].id : ""
   description = "Karpenter instance profile ID"
 }
 

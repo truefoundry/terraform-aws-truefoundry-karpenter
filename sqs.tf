@@ -7,13 +7,14 @@ resource "aws_sqs_queue" "karpenter" {
 
 data "aws_iam_policy_document" "sqs" {
   statement {
-    resources = [aws_sqs_queue.karpenter.arn]
+    resources = [aws_sqs_queue.karpenter[0].arn]
     actions   = ["sqs:DeleteMessage", "sqs:GetQueueUrl", "sqs:GetQueueAttributes", "sqs:ReceiveMessage"]
     effect    = "Allow"
   }
 }
 
 resource "aws_iam_policy" "sqs" {
+  count       = var.create_karpenter_iam_role ? 1 : 0
   name_prefix = "${var.cluster_name}-karpenter-access-to-sqs"
   description = "Access policy for karpenter to access SQS for ${var.cluster_name}"
   policy      = data.aws_iam_policy_document.sqs.json
@@ -53,4 +54,9 @@ resource "aws_cloudwatch_event_target" "this" {
   rule      = aws_cloudwatch_event_rule.this[each.key].name
   target_id = "KarpenterInterruptionQueueTarget"
   arn       = aws_sqs_queue.karpenter.arn
+}
+
+moved {
+  from = aws_iam_policy.sqs
+  to   = aws_iam_policy.sqs[0]
 }

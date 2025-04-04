@@ -45,6 +45,7 @@ Truefoundry AWS Karpenter Module
 | <a name="input_controller_nodegroup_name"></a> [controller\_nodegroup\_name](#input\_controller\_nodegroup\_name) | The initial nodegroup name | `string` | n/a | yes |
 | <a name="input_create_karpenter_iam_role"></a> [create\_karpenter\_iam\_role](#input\_create\_karpenter\_iam\_role) | Enable/disable creation of IAM role for karpenter | `bool` | `true` | no |
 | <a name="input_existing_karpenter_iam_role_arn"></a> [existing\_karpenter\_iam\_role\_arn](#input\_existing\_karpenter\_iam\_role\_arn) | ARN of the existing karpenter role. This will be used only when create\_karpenter\_iam\_role is set to false | `string` | `""` | no |
+| <a name="input_existing_karpenter_instance_profile"></a> [existing\_karpenter\_instance\_profile](#input\_existing\_karpenter\_instance\_profile) | Instance profile for karpenter. This will be used only when create\_karpenter\_iam\_role is set to false | `string` | `""` | no |
 | <a name="input_k8s_service_account_name"></a> [k8s\_service\_account\_name](#input\_k8s\_service\_account\_name) | The k8s karpenter service account name | `string` | `"karpenter"` | no |
 | <a name="input_k8s_service_account_namespace"></a> [k8s\_service\_account\_namespace](#input\_k8s\_service\_account\_namespace) | The k8s karpenter namespace | `string` | `"kube-system"` | no |
 | <a name="input_message_retention_seconds"></a> [message\_retention\_seconds](#input\_message\_retention\_seconds) | Message retention in seconds for SQS queue | `number` | `300` | no |

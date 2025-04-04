@@ -27,6 +27,12 @@ variable "existing_karpenter_iam_role_arn" {
   default     = ""
 }
 
+variable "existing_karpenter_instance_profile" {
+  description = "Instance profile for karpenter. This will be used only when create_karpenter_iam_role is set to false"
+  type        = string
+  default     = ""
+}
+
 variable "oidc_provider_arn" {
   description = "The oidc provider  arn of the eks cluster"
   type        = string

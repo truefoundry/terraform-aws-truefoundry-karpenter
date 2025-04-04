@@ -25,12 +25,18 @@ module "karpenter_irsa_role" {
 }
 
 resource "aws_iam_instance_profile" "karpenter" {
-  name = "${var.cluster_name}-karpenter-${var.controller_nodegroup_name}"
-  role = split("/", var.controller_node_iam_role_arn)[1]
-  tags = local.tags
+  count = var.create_karpenter_iam_role ? 1 : 0
+  name  = "${var.cluster_name}-karpenter-${var.controller_nodegroup_name}"
+  role  = split("/", var.controller_node_iam_role_arn)[1]
+  tags  = local.tags
 }
 
 moved {
   from = module.karpenter_irsa_role
   to   = module.karpenter_irsa_role[0]
+}
+
+moved {
+  from = resource.aws_iam_instance_profile.karpenter
+  to   = resource.aws_iam_instance_profile.karpenter[0]
 }

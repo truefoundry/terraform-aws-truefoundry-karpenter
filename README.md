@@ -40,7 +40,6 @@ Truefoundry AWS Karpenter Module
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_additional_controller_node_iam_role_arns"></a> [additional\_controller\_node\_iam\_role\_arns](#input\_additional\_controller\_node\_iam\_role\_arns) | The additional node iam roles to be used by karpenter | `list(string)` | `[]` | no |
-| <a name="input_additional_controller_role_policies_arn"></a> [additional\_controller\_role\_policies\_arn](#input\_additional\_controller\_role\_policies\_arn) | arn of dditional policies to attach to the karpenter controller role (Example {'x-policy' = arn:aws:iam::123456789012:policy/x-policy}) | `any` | `{}` | no |
 | <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | Cluster Name to install karpenter | `string` | n/a | yes |
 | <a name="input_controller_node_iam_role_arn"></a> [controller\_node\_iam\_role\_arn](#input\_controller\_node\_iam\_role\_arn) | The node iam role for the initial node group to be used by karpenter | `string` | n/a | yes |
 | <a name="input_controller_nodegroup_name"></a> [controller\_nodegroup\_name](#input\_controller\_nodegroup\_name) | The initial nodegroup name | `string` | n/a | yes |
@@ -49,8 +48,12 @@ Truefoundry AWS Karpenter Module
 | <a name="input_existing_karpenter_instance_profile"></a> [existing\_karpenter\_instance\_profile](#input\_existing\_karpenter\_instance\_profile) | Instance profile for karpenter. This will be used only when create\_karpenter\_iam\_role is set to false | `string` | `""` | no |
 | <a name="input_k8s_service_account_name"></a> [k8s\_service\_account\_name](#input\_k8s\_service\_account\_name) | The k8s karpenter service account name | `string` | `"karpenter"` | no |
 | <a name="input_k8s_service_account_namespace"></a> [k8s\_service\_account\_namespace](#input\_k8s\_service\_account\_namespace) | The k8s karpenter namespace | `string` | `"kube-system"` | no |
+| <a name="input_karpenter_iam_role_additional_policy_arns"></a> [karpenter\_iam\_role\_additional\_policy\_arns](#input\_karpenter\_iam\_role\_additional\_policy\_arns) | ARNs of additional policies to attach to the karpenter IAM role. For example {'x-policy' = arn:aws:iam::123456789012:policy/x-policy}) | `any` | `{}` | no |
+| <a name="input_karpenter_iam_role_enable_override"></a> [karpenter\_iam\_role\_enable\_override](#input\_karpenter\_iam\_role\_enable\_override) | Enable/disable override of the node iam role for the initial node group to be used by karpenter. If this is set to true, the karpenter\_iam\_role\_override\_name will be used. | `bool` | `false` | no |
+| <a name="input_karpenter_iam_role_override_name"></a> [karpenter\_iam\_role\_override\_name](#input\_karpenter\_iam\_role\_override\_name) | The name of the node iam role to be used by karpenter. This will be used only when karpenter\_iam\_role\_enable\_override is set to true | `string` | `""` | no |
+| <a name="input_karpenter_iam_role_permissions_boundary_arn"></a> [karpenter\_iam\_role\_permissions\_boundary\_arn](#input\_karpenter\_iam\_role\_permissions\_boundary\_arn) | The permissions boundary ARN to be used by the karpenter IAM role | `string` | `""` | no |
 | <a name="input_message_retention_seconds"></a> [message\_retention\_seconds](#input\_message\_retention\_seconds) | Message retention in seconds for SQS queue | `number` | `300` | no |
-| <a name="input_oidc_provider_arn"></a> [oidc\_provider\_arn](#input\_oidc\_provider\_arn) | The oidc provider  arn of the eks cluster | `string` | n/a | yes |
+| <a name="input_oidc_provider_arn"></a> [oidc\_provider\_arn](#input\_oidc\_provider\_arn) | The oidc provider arn of the eks cluster | `string` | n/a | yes |
 | <a name="input_sqs_enable_encryption"></a> [sqs\_enable\_encryption](#input\_sqs\_enable\_encryption) | Enable Server side encryption for SQS | `bool` | `true` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | AWS Tags common to all the resources created | `map(string)` | `{}` | no |
 

@@ -6,17 +6,19 @@ module "karpenter_irsa_role" {
   count                              = var.create_karpenter_iam_role ? 1 : 0
   source                             = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
   version                            = "5.59.0"
-  role_name                          = "${var.cluster_name}-karpenter"
+  role_name                          = var.karpenter_iam_role_enable_override ? var.karpenter_iam_role_override_name : "${var.cluster_name}-karpenter"
   attach_karpenter_controller_policy = true
 
   karpenter_controller_cluster_id         = var.cluster_name
   karpenter_controller_node_iam_role_arns = flatten([var.controller_node_iam_role_arn, var.additional_controller_node_iam_role_arns])
 
   karpenter_controller_ssm_parameter_arns = ["arn:${data.aws_partition.current.partition}:ssm:*:*:parameter/aws/service/*"]
-  attach_vpc_cni_policy = true
-  vpc_cni_enable_ipv4   = true
+  attach_vpc_cni_policy                   = true
+  vpc_cni_enable_ipv4                     = true
 
   role_policy_arns = local.karpenter_controller_role_policy_arns
+
+  role_permissions_boundary_arn = var.karpenter_iam_role_permissions_boundary_arn
 
   oidc_providers = {
     main = {

@@ -1,6 +1,6 @@
 locals {
   tags = merge(
-    {
+    var.disable_default_tags ? {} : {
       "terraform-module" = "cluster-iam-karpenter"
       "terraform"        = "true"
       "cluster-name"     = var.cluster_name
@@ -48,4 +48,6 @@ locals {
     var.karpenter_iam_role_additional_policy_arns
   ) : {}
   service_account_namespaces = var.k8s_service_account_namespace == "karpenter" ? ["${var.k8s_service_account_namespace}:${var.k8s_service_account_name}"] : ["${var.k8s_service_account_namespace}:${var.k8s_service_account_name}", "karpenter:${var.k8s_service_account_name}"]
+
+  karpenter_iam_role_default_policy_prefix = "${var.cluster_name}-karpenter-"
 }

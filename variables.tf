@@ -13,6 +13,12 @@ variable "tags" {
   description = "AWS Tags common to all the resources created"
 }
 
+variable "disable_default_tags" {
+  description = "Disable default tags for the resources created"
+  type        = bool
+  default     = false
+}
+
 ################################################################################
 # Karpenter 
 ################################################################################
@@ -93,6 +99,18 @@ variable "karpenter_iam_role_additional_policy_arns" {
 
 variable "karpenter_iam_role_permissions_boundary_arn" {
   description = "The permissions boundary ARN to be used by the karpenter IAM role"
+  type        = string
+  default     = ""
+}
+
+variable "karpenter_iam_role_policy_prefix_enable_override" {
+  description = "Enable/disable override of the policy prefix for the karpenter IAM role"
+  type        = bool
+  default     = false
+}
+
+variable "karpenter_iam_role_policy_prefix_override_name" {
+  description = "The name of the policy prefix to be used by the karpenter IAM role"
   type        = string
   default     = ""
 }

@@ -20,6 +20,8 @@ module "karpenter_irsa_role" {
 
   role_permissions_boundary_arn = var.karpenter_iam_role_permissions_boundary_arn
 
+  policy_name_prefix = var.karpenter_iam_role_policy_prefix_enable_override ? var.karpenter_iam_role_policy_prefix_override_name : local.karpenter_iam_role_default_policy_prefix
+
   oidc_providers = {
     main = {
       provider_arn               = var.oidc_provider_arn

@@ -14,8 +14,9 @@ data "aws_iam_policy_document" "sqs" {
 }
 
 resource "aws_iam_policy" "sqs" {
-  count       = var.create_karpenter_iam_role ? 1 : 0
-  name_prefix = "${var.cluster_name}-karpenter-access-to-sqs"
+  count = var.create_karpenter_iam_role ? 1 : 0
+  # We need to add "access-to-sqs" to the policy prefix when karpenter_iam_role_policy_prefix_enable_override is true because if not final policy will be just be prefix-timestasmp
+  name_prefix = var.karpenter_iam_role_policy_prefix_enable_override ? "${var.karpenter_iam_role_policy_prefix_override_name}access-to-sqs" : "${local.karpenter_iam_role_default_policy_prefix}access-to-sqs"
   description = "Access policy for karpenter to access SQS for ${var.cluster_name}"
   policy      = data.aws_iam_policy_document.sqs.json
   tags        = local.tags

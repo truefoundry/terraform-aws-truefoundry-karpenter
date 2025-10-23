@@ -44,6 +44,6 @@ moved {
 }
 
 moved {
-  from = resource.aws_iam_instance_profile.karpenter
-  to   = resource.aws_iam_instance_profile.karpenter[0]
+  from = aws_iam_instance_profile.karpenter
+  to   = aws_iam_instance_profile.karpenter[0]
 }

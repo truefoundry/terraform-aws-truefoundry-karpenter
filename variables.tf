@@ -2,6 +2,12 @@
 # Global
 ################################################################################
 
+variable "disable_old_changes" {
+  description = "When false (default), the legacy individual resources (IRSA role, SQS queue, CloudWatch rules) are kept alongside the new terraform-aws-modules/eks karpenter sub-module. Set to true once migration is complete to destroy the old resources and rely solely on the sub-module."
+  type        = bool
+  default     = false
+}
+
 variable "cluster_name" {
   description = "Cluster Name to install karpenter"
   type        = string

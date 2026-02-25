@@ -41,7 +41,9 @@ locals {
       }
     }
   }
-  karpenter_controller_role_policy_arns = var.create_karpenter_iam_role ? merge(
+  # Attached to the old-path IRSA role (module.karpenter_irsa_role).
+  # Only populated when the old resources are still active.
+  karpenter_controller_role_policy_arns = var.create_karpenter_iam_role && !var.disable_old_changes ? merge(
     {
       "sqs_policy" = aws_iam_policy.sqs[0].arn
     },
@@ -52,4 +54,5 @@ locals {
   karpenter_iam_role_default_policy_prefix = "${var.cluster_name}-karpenter-"
 
   karpenter_iam_role_policy_prefix = var.karpenter_iam_role_policy_prefix_enable_override ? "${var.karpenter_iam_role_policy_prefix_override_name}-${local.karpenter_iam_role_default_policy_prefix}" : local.karpenter_iam_role_default_policy_prefix
+
 }

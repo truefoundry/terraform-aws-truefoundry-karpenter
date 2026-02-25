@@ -32,7 +32,7 @@ module "karpenter_irsa_role" {
 }
 
 resource "aws_iam_instance_profile" "karpenter" {
-  count = var.create_karpenter_iam_role && !var.disable_old_changes ? 1 : 0
+  count = var.create_karpenter_iam_role ? 1 : 0
   name  = "${var.cluster_name}-karpenter-${var.controller_nodegroup_name}"
   role  = split("/", var.controller_node_iam_role_arn)[1]
   tags  = local.tags
@@ -73,8 +73,8 @@ module "karpenter" {
   node_iam_role_arn    = var.controller_node_iam_role_arn
   create_access_entry  = false
 
-  # Instance profile (mirrors aws_iam_instance_profile.karpenter on the old path)
-  create_instance_profile = var.create_karpenter_iam_role
+  # Instance profile is managed by aws_iam_instance_profile.karpenter
+  create_instance_profile = false
 
   # SQS interruption queue + CloudWatch event rules (both controlled by this flag)
   enable_spot_termination   = true

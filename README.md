@@ -19,6 +19,7 @@ Truefoundry AWS Karpenter Module
 
 | Name | Source | Version |
 |------|--------|---------|
+| <a name="module_karpenter"></a> [karpenter](#module\_karpenter) | terraform-aws-modules/eks/aws//modules/karpenter | ~> 20.0 |
 | <a name="module_karpenter_irsa_role"></a> [karpenter\_irsa\_role](#module\_karpenter\_irsa\_role) | terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks | 5.59.0 |
 
 ## Resources
@@ -45,6 +46,7 @@ Truefoundry AWS Karpenter Module
 | <a name="input_controller_nodegroup_name"></a> [controller\_nodegroup\_name](#input\_controller\_nodegroup\_name) | The initial nodegroup name | `string` | n/a | yes |
 | <a name="input_create_karpenter_iam_role"></a> [create\_karpenter\_iam\_role](#input\_create\_karpenter\_iam\_role) | Enable/disable creation of IAM role for karpenter | `bool` | `true` | no |
 | <a name="input_disable_default_tags"></a> [disable\_default\_tags](#input\_disable\_default\_tags) | Disable default tags for the resources created | `bool` | `false` | no |
+| <a name="input_disable_old_changes"></a> [disable\_old\_changes](#input\_disable\_old\_changes) | When false (default), the legacy individual resources (IRSA role, SQS queue, CloudWatch rules) are kept alongside the new terraform-aws-modules/eks karpenter sub-module. Set to true once migration is complete to destroy the old resources and rely solely on the sub-module. | `bool` | `false` | no |
 | <a name="input_existing_karpenter_iam_role_arn"></a> [existing\_karpenter\_iam\_role\_arn](#input\_existing\_karpenter\_iam\_role\_arn) | ARN of the existing karpenter role. This will be used only when create\_karpenter\_iam\_role is set to false | `string` | `""` | no |
 | <a name="input_existing_karpenter_instance_profile"></a> [existing\_karpenter\_instance\_profile](#input\_existing\_karpenter\_instance\_profile) | Instance profile for karpenter. This will be used only when create\_karpenter\_iam\_role is set to false | `string` | `""` | no |
 | <a name="input_k8s_service_account_name"></a> [k8s\_service\_account\_name](#input\_k8s\_service\_account\_name) | The k8s karpenter service account name | `string` | `"karpenter"` | no |
@@ -64,7 +66,9 @@ Truefoundry AWS Karpenter Module
 
 | Name | Description |
 |------|-------------|
-| <a name="output_karpenter_instance_profile_id"></a> [karpenter\_instance\_profile\_id](#output\_karpenter\_instance\_profile\_id) | Karpenter instance profile ID |
-| <a name="output_karpenter_role_arn"></a> [karpenter\_role\_arn](#output\_karpenter\_role\_arn) | Karpenter role ARN |
-| <a name="output_karpenter_sqs_name"></a> [karpenter\_sqs\_name](#output\_karpenter\_sqs\_name) | Name of the SQS queue for interruption handling |
+| <a name="output_karpenter_instance_profile_id"></a> [karpenter\_instance\_profile\_id](#output\_karpenter\_instance\_profile\_id) | Karpenter instance profile ID from the EKS karpenter sub-module |
+| <a name="output_karpenter_instance_profile_name"></a> [karpenter\_instance\_profile\_name](#output\_karpenter\_instance\_profile\_name) | Karpenter instance profile name from the EKS karpenter sub-module |
+| <a name="output_karpenter_role_arn"></a> [karpenter\_role\_arn](#output\_karpenter\_role\_arn) | Karpenter controller role ARN from the EKS karpenter sub-module |
+| <a name="output_karpenter_sqs_arn"></a> [karpenter\_sqs\_arn](#output\_karpenter\_sqs\_arn) | SQS interruption queue ARN from the EKS karpenter sub-module |
+| <a name="output_karpenter_sqs_name"></a> [karpenter\_sqs\_name](#output\_karpenter\_sqs\_name) | SQS interruption queue name from the EKS karpenter sub-module |
 <!-- END_TF_DOCS -->

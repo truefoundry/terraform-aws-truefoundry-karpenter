@@ -70,8 +70,9 @@ module "karpenter" {
   # Instance profile is managed by aws_iam_instance_profile.karpenter
   create_instance_profile = false
 
-  # Use IRSA (not Pod Identity) to match the existing deployment
-  enable_pod_identity             = false
+  enable_pod_identity             = true
+
+  # Use IRSA to match the existing deployment
   enable_irsa                     = true
   irsa_oidc_provider_arn          = var.oidc_provider_arn
   irsa_namespace_service_accounts = local.service_account_namespaces

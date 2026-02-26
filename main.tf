@@ -57,16 +57,10 @@ module "karpenter" {
 
   # IAM role for the controller
   create_iam_role                   = var.create_karpenter_iam_role
-  iam_role_name                     = var.karpenter_iam_role_enable_override ? var.karpenter_iam_role_override_name : "${var.cluster_name}-eks-karpenter"
+  iam_role_name                     = var.karpenter_iam_role_enable_override ? var.karpenter_iam_role_override_name : "${var.cluster_name}-karpenter-controller"
   iam_role_use_name_prefix          = false
   iam_role_permissions_boundary_arn = var.karpenter_iam_role_permissions_boundary_arn != "" ? var.karpenter_iam_role_permissions_boundary_arn : null
   iam_role_policies                 = var.karpenter_iam_role_additional_policy_arns
-
-  # IRSA – disable Pod Identity and use the cluster OIDC provider instead
-  enable_pod_identity             = false
-  enable_irsa                     = var.create_karpenter_iam_role
-  irsa_oidc_provider_arn          = var.oidc_provider_arn
-  irsa_namespace_service_accounts = local.service_account_namespaces
 
   # Re-use the existing node IAM role; skip creating a new one and its access entry
   create_node_iam_role = false
@@ -76,9 +70,15 @@ module "karpenter" {
   # Instance profile is managed by aws_iam_instance_profile.karpenter
   create_instance_profile = false
 
+  # Use IRSA (not Pod Identity) to match the existing deployment
+  enable_pod_identity             = false
+  enable_irsa                     = true
+  irsa_oidc_provider_arn          = var.oidc_provider_arn
+  irsa_namespace_service_accounts = local.service_account_namespaces
+
   # SQS interruption queue + CloudWatch event rules (both controlled by this flag)
   enable_spot_termination   = true
-  queue_name                = "${var.cluster_name}-karpenter"
+  queue_name                = "${var.cluster_name}-karpenter-queue"
   queue_managed_sse_enabled = var.sqs_enable_encryption
 
   tags = local.tags

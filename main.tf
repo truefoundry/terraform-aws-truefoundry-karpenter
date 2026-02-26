@@ -46,7 +46,7 @@ resource "aws_iam_instance_profile" "karpenter" {
 # enable_spot_termination = true drives both the SQS interruption queue and all
 # four CloudWatch event rules (no separate create_queue / create_event_rules
 # flags exist in this module version).
-# Pod Identity is disabled; IRSA is used to match the old-path behaviour.
+# Both Pod Identity and IRSA are enabled. Pod Identity is the preferred
 ################################################################################
 
 module "karpenter" {
@@ -70,12 +70,14 @@ module "karpenter" {
   # Instance profile is managed by aws_iam_instance_profile.karpenter
   create_instance_profile = false
 
+  # Pod Identity
   enable_pod_identity             = true
+  create_pod_identity_association = true
+  namespace                       = var.k8s_service_account_namespace
+  service_account                 = var.k8s_service_account_name
 
-  # Use IRSA to match the existing deployment
-  enable_irsa                     = true
-  irsa_oidc_provider_arn          = var.oidc_provider_arn
-  irsa_namespace_service_accounts = local.service_account_namespaces
+  # Disable IRSA
+  enable_irsa                     = false
 
   # SQS interruption queue + CloudWatch event rules (both controlled by this flag)
   enable_spot_termination   = true

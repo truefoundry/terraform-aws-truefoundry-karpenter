@@ -77,7 +77,7 @@ module "karpenter" {
   service_account                 = var.k8s_service_account_name
 
   # Disable IRSA
-  enable_irsa                     = false
+  enable_irsa = false
 
   # SQS interruption queue + CloudWatch event rules (both controlled by this flag)
   enable_spot_termination   = true

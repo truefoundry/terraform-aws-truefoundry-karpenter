@@ -60,7 +60,9 @@ Truefoundry AWS Karpenter Module
 | <a name="input_message_retention_seconds"></a> [message\_retention\_seconds](#input\_message\_retention\_seconds) | Message retention in seconds for SQS queue | `number` | `300` | no |
 | <a name="input_oidc_provider_arn"></a> [oidc\_provider\_arn](#input\_oidc\_provider\_arn) | The oidc provider arn of the eks cluster | `string` | n/a | yes |
 | <a name="input_sqs_enable_encryption"></a> [sqs\_enable\_encryption](#input\_sqs\_enable\_encryption) | Enable Server side encryption for SQS | `bool` | `true` | no |
+| <a name="input_sqs_queue_override_name"></a> [sqs\_queue\_override\_name](#input\_sqs\_queue\_override\_name) | Override name for the SQS queue created for karpenter spot interruption handling. If not set, it will default to <cluster\_name>-karpenter-queue | `string` | `""` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | AWS Tags common to all the resources created | `map(string)` | `{}` | no |
+| <a name="input_use_karpenter_iam_role_name_prefix"></a> [use\_karpenter\_iam\_role\_name\_prefix](#input\_use\_karpenter\_iam\_role\_name\_prefix) | Boolean flag to enable/disable using name prefix for karpenter iam role | `any` | n/a | yes |
 
 ## Outputs
 

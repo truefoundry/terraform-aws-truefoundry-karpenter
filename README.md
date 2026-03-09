@@ -68,8 +68,8 @@ Truefoundry AWS Karpenter Module
 
 | Name | Description |
 |------|-------------|
-| <a name="output_karpenter_instance_profile_id"></a> [karpenter\_instance\_profile\_id](#output\_karpenter\_instance\_profile\_id) | Karpenter instance profile ID from the EKS karpenter sub-module |
-| <a name="output_karpenter_instance_profile_name"></a> [karpenter\_instance\_profile\_name](#output\_karpenter\_instance\_profile\_name) | Karpenter instance profile name from the EKS karpenter sub-module |
+| <a name="output_karpenter_instance_profile_id"></a> [karpenter\_instance\_profile\_id](#output\_karpenter\_instance\_profile\_id) | Karpenter instance profile ID |
+| <a name="output_karpenter_instance_profile_name"></a> [karpenter\_instance\_profile\_name](#output\_karpenter\_instance\_profile\_name) | Karpenter instance profile name |
 | <a name="output_karpenter_role_arn"></a> [karpenter\_role\_arn](#output\_karpenter\_role\_arn) | Karpenter controller role ARN from the EKS karpenter sub-module |
 | <a name="output_karpenter_sqs_arn"></a> [karpenter\_sqs\_arn](#output\_karpenter\_sqs\_arn) | SQS interruption queue ARN from the EKS karpenter sub-module |
 | <a name="output_karpenter_sqs_name"></a> [karpenter\_sqs\_name](#output\_karpenter\_sqs\_name) | SQS interruption queue name from the EKS karpenter sub-module |

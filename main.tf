@@ -46,7 +46,7 @@ resource "aws_iam_instance_profile" "karpenter" {
 # enable_spot_termination = true drives both the SQS interruption queue and all
 # four CloudWatch event rules (no separate create_queue / create_event_rules
 # flags exist in this module version).
-# Pod Identity is disabled; IRSA is used to match the old-path behaviour.
+# Pod Identity is enabled; IRSA is disabled.
 ################################################################################
 
 module "karpenter" {
@@ -81,7 +81,7 @@ module "karpenter" {
 
   # SQS interruption queue + CloudWatch event rules (both controlled by this flag)
   enable_spot_termination   = true
-  queue_name                = var.sqs_queue_override_name ? var.sqs_queue_override_name : "${var.cluster_name}-karpenter-queue"
+  queue_name                = var.sqs_queue_override_name != "" ? var.sqs_queue_override_name : "${var.cluster_name}-karpenter-queue"
   queue_managed_sse_enabled = var.sqs_enable_encryption
 
   tags = local.tags

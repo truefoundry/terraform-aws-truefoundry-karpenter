@@ -4,13 +4,13 @@ output "karpenter_role_arn" {
 }
 
 output "karpenter_instance_profile_id" {
-  value       = var.create_karpenter_iam_role ? module.karpenter.instance_profile_id : var.existing_karpenter_instance_profile
-  description = "Karpenter instance profile ID from the EKS karpenter sub-module"
+  value       = var.create_karpenter_iam_role ? aws_iam_instance_profile.karpenter[0].id : var.existing_karpenter_instance_profile
+  description = "Karpenter instance profile ID"
 }
 
 output "karpenter_instance_profile_name" {
-  value       = var.create_karpenter_iam_role ? module.karpenter.instance_profile_name : var.existing_karpenter_instance_profile
-  description = "Karpenter instance profile name from the EKS karpenter sub-module"
+  value       = var.create_karpenter_iam_role ? aws_iam_instance_profile.karpenter[0].name : var.existing_karpenter_instance_profile
+  description = "Karpenter instance profile name"
 }
 
 output "karpenter_sqs_name" {

@@ -55,6 +55,8 @@ variable "controller_nodegroup_name" {
 
 variable "use_karpenter_iam_role_name_prefix" {
   description = "Boolean flag to enable/disable using name prefix for karpenter iam role"
+  type        = bool
+  default     = false
 }
 
 ################################################################################

@@ -2,6 +2,12 @@
 # Global
 ################################################################################
 
+variable "disable_old_changes" {
+  description = "When false (default), the legacy individual resources (IRSA role, SQS queue, CloudWatch rules) are kept alongside the new terraform-aws-modules/eks karpenter sub-module. Set to true once migration is complete to destroy the old resources and rely solely on the sub-module."
+  type        = bool
+  default     = false
+}
+
 variable "cluster_name" {
   description = "Cluster Name to install karpenter"
   type        = string
@@ -45,6 +51,12 @@ variable "additional_controller_node_iam_role_arns" {
 variable "controller_nodegroup_name" {
   description = "The initial nodegroup name"
   type        = string
+}
+
+variable "karpenter_iam_role_name_prefix_enabled" {
+  description = "Boolean flag to enable/disable using name prefix for karpenter iam role"
+  type        = bool
+  default     = false
 }
 
 ################################################################################
@@ -106,7 +118,7 @@ variable "karpenter_iam_role_permissions_boundary_arn" {
 variable "karpenter_iam_role_policy_prefix_enable_override" {
   description = "Enable/disable override of the policy prefix for the karpenter IAM role"
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "karpenter_iam_role_policy_prefix_override_name" {
@@ -129,4 +141,16 @@ variable "message_retention_seconds" {
   description = "Message retention in seconds for SQS queue"
   type        = number
   default     = 300
+}
+
+variable "sqs_override_name" {
+  description = "Override name for the SQS queue created for karpenter spot interruption handling."
+  type        = string
+  default     = ""
+}
+
+variable "sqs_enable_override" {
+  description = "Enable/disable override of the SQS queue name for karpenter spot interruption handling"
+  type        = bool
+  default     = false
 }

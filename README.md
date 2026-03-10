@@ -53,6 +53,7 @@ Truefoundry AWS Karpenter Module
 | <a name="input_k8s_service_account_namespace"></a> [k8s\_service\_account\_namespace](#input\_k8s\_service\_account\_namespace) | The k8s karpenter namespace | `string` | `"kube-system"` | no |
 | <a name="input_karpenter_iam_role_additional_policy_arns"></a> [karpenter\_iam\_role\_additional\_policy\_arns](#input\_karpenter\_iam\_role\_additional\_policy\_arns) | ARNs of additional policies to attach to the karpenter IAM role. For example {'x-policy' = arn:aws:iam::123456789012:policy/x-policy}) | `any` | `{}` | no |
 | <a name="input_karpenter_iam_role_enable_override"></a> [karpenter\_iam\_role\_enable\_override](#input\_karpenter\_iam\_role\_enable\_override) | Enable/disable override of the node iam role for the initial node group to be used by karpenter. If this is set to true, the karpenter\_iam\_role\_override\_name will be used. | `bool` | `false` | no |
+| <a name="input_karpenter_iam_role_name_prefix_enabled"></a> [karpenter\_iam\_role\_name\_prefix\_enabled](#input\_karpenter\_iam\_role\_name\_prefix\_enabled) | Boolean flag to enable/disable using name prefix for karpenter iam role | `bool` | `false` | no |
 | <a name="input_karpenter_iam_role_override_name"></a> [karpenter\_iam\_role\_override\_name](#input\_karpenter\_iam\_role\_override\_name) | The name of the node iam role to be used by karpenter. This will be used only when karpenter\_iam\_role\_enable\_override is set to true | `string` | `""` | no |
 | <a name="input_karpenter_iam_role_permissions_boundary_arn"></a> [karpenter\_iam\_role\_permissions\_boundary\_arn](#input\_karpenter\_iam\_role\_permissions\_boundary\_arn) | The permissions boundary ARN to be used by the karpenter IAM role | `string` | `""` | no |
 | <a name="input_karpenter_iam_role_policy_prefix_enable_override"></a> [karpenter\_iam\_role\_policy\_prefix\_enable\_override](#input\_karpenter\_iam\_role\_policy\_prefix\_enable\_override) | Enable/disable override of the policy prefix for the karpenter IAM role | `bool` | `false` | no |
@@ -60,9 +61,9 @@ Truefoundry AWS Karpenter Module
 | <a name="input_message_retention_seconds"></a> [message\_retention\_seconds](#input\_message\_retention\_seconds) | Message retention in seconds for SQS queue | `number` | `300` | no |
 | <a name="input_oidc_provider_arn"></a> [oidc\_provider\_arn](#input\_oidc\_provider\_arn) | The oidc provider arn of the eks cluster | `string` | n/a | yes |
 | <a name="input_sqs_enable_encryption"></a> [sqs\_enable\_encryption](#input\_sqs\_enable\_encryption) | Enable Server side encryption for SQS | `bool` | `true` | no |
-| <a name="input_sqs_queue_override_name"></a> [sqs\_queue\_override\_name](#input\_sqs\_queue\_override\_name) | Override name for the SQS queue created for karpenter spot interruption handling. If not set, it will default to <cluster\_name>-karpenter-queue | `string` | `""` | no |
+| <a name="input_sqs_enable_override"></a> [sqs\_enable\_override](#input\_sqs\_enable\_override) | Enable/disable override of the SQS queue name for karpenter spot interruption handling | `bool` | `false` | no |
+| <a name="input_sqs_override_name"></a> [sqs\_override\_name](#input\_sqs\_override\_name) | Override name for the SQS queue created for karpenter spot interruption handling. | `string` | `""` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | AWS Tags common to all the resources created | `map(string)` | `{}` | no |
-| <a name="input_use_karpenter_iam_role_name_prefix"></a> [use\_karpenter\_iam\_role\_name\_prefix](#input\_use\_karpenter\_iam\_role\_name\_prefix) | Boolean flag to enable/disable using name prefix for karpenter iam role | `bool` | `false` | no |
 
 ## Outputs
 

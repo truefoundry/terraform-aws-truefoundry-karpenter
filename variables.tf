@@ -118,7 +118,7 @@ variable "karpenter_iam_role_permissions_boundary_arn" {
 variable "karpenter_iam_role_policy_prefix_enable_override" {
   description = "Enable/disable override of the policy prefix for the karpenter IAM role"
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "karpenter_iam_role_policy_prefix_override_name" {

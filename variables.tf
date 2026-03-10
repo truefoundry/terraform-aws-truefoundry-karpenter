@@ -2,12 +2,6 @@
 # Global
 ################################################################################
 
-variable "disable_old_changes" {
-  description = "When false (default), the legacy individual resources (IRSA role, SQS queue, CloudWatch rules) are kept alongside the new terraform-aws-modules/eks karpenter sub-module. Set to true once migration is complete to destroy the old resources and rely solely on the sub-module."
-  type        = bool
-  default     = false
-}
-
 variable "cluster_name" {
   description = "Cluster Name to install karpenter"
   type        = string
@@ -40,13 +34,6 @@ variable "k8s_service_account_namespace" {
   type        = string
   default     = "kube-system"
 }
-
-variable "additional_controller_node_iam_role_arns" {
-  description = "The additional node iam roles to be used by karpenter"
-  type        = list(string)
-  default     = []
-}
-
 
 variable "controller_nodegroup_name" {
   description = "The initial nodegroup name"
@@ -98,11 +85,6 @@ variable "existing_karpenter_instance_profile" {
   default     = ""
 }
 
-variable "oidc_provider_arn" {
-  description = "The oidc provider arn of the eks cluster"
-  type        = string
-}
-
 variable "karpenter_iam_role_additional_policy_arns" {
   description = "ARNs of additional policies to attach to the karpenter IAM role. For example {'x-policy' = arn:aws:iam::123456789012:policy/x-policy})"
   type        = any
@@ -115,18 +97,6 @@ variable "karpenter_iam_role_permissions_boundary_arn" {
   default     = ""
 }
 
-variable "karpenter_iam_role_policy_prefix_enable_override" {
-  description = "Enable/disable override of the policy prefix for the karpenter IAM role"
-  type        = bool
-  default     = true
-}
-
-variable "karpenter_iam_role_policy_prefix_override_name" {
-  description = "The name of the policy prefix to be used by the karpenter IAM role"
-  type        = string
-  default     = ""
-}
-
 ################################################################################
 # SQS
 ################################################################################
@@ -135,12 +105,6 @@ variable "sqs_enable_encryption" {
   description = "Enable Server side encryption for SQS"
   type        = bool
   default     = true
-}
-
-variable "message_retention_seconds" {
-  description = "Message retention in seconds for SQS queue"
-  type        = number
-  default     = 300
 }
 
 variable "sqs_override_name" {

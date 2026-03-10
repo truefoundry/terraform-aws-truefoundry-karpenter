@@ -53,7 +53,7 @@ variable "controller_nodegroup_name" {
   type        = string
 }
 
-variable "use_karpenter_iam_role_name_prefix" {
+variable "karpenter_iam_role_name_prefix_enabled" {
   description = "Boolean flag to enable/disable using name prefix for karpenter iam role"
   type        = bool
   default     = false
@@ -143,8 +143,14 @@ variable "message_retention_seconds" {
   default     = 300
 }
 
-variable "sqs_queue_override_name" {
-  description = "Override name for the SQS queue created for karpenter spot interruption handling. If not set, it will default to <cluster_name>-karpenter-queue"
+variable "sqs_override_name" {
+  description = "Override name for the SQS queue created for karpenter spot interruption handling."
   type        = string
   default     = ""
+}
+
+variable "sqs_enable_override" {
+  description = "Enable/disable override of the SQS queue name for karpenter spot interruption handling"
+  type        = bool
+  default     = false
 }

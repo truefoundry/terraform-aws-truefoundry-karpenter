@@ -58,7 +58,7 @@ module "karpenter" {
   # IAM role for the controller
   create_iam_role                   = var.create_karpenter_iam_role
   iam_role_name                     = var.karpenter_iam_role_enable_override ? var.karpenter_iam_role_override_name : "${var.cluster_name}-karpenter-controller"
-  iam_role_use_name_prefix          = var.use_karpenter_iam_role_name_prefix
+  iam_role_use_name_prefix          = var.karpenter_iam_role_name_prefix_enabled
   iam_role_permissions_boundary_arn = var.karpenter_iam_role_permissions_boundary_arn != "" ? var.karpenter_iam_role_permissions_boundary_arn : null
   iam_role_policies                 = var.karpenter_iam_role_additional_policy_arns
 
@@ -81,7 +81,7 @@ module "karpenter" {
 
   # SQS interruption queue + CloudWatch event rules (both controlled by this flag)
   enable_spot_termination   = true
-  queue_name                = var.sqs_queue_override_name != "" ? var.sqs_queue_override_name : "${var.cluster_name}-karpenter-queue"
+  queue_name                = var.sqs_enable_override ? var.sqs_override_name : "${var.cluster_name}-karpenter-queue"
   queue_managed_sse_enabled = var.sqs_enable_encryption
 
   tags = local.tags

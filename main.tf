@@ -36,13 +36,9 @@ module "karpenter" {
   create_instance_profile = false
 
   # Pod Identity
-  enable_pod_identity             = true
   create_pod_identity_association = true
   namespace                       = var.k8s_service_account_namespace
   service_account                 = var.k8s_service_account_name
-
-  # Disable IRSA
-  enable_irsa = false
 
   # SQS interruption queue + CloudWatch event rules (both controlled by this flag)
   enable_spot_termination   = true

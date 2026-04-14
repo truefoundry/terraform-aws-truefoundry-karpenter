@@ -40,11 +40,6 @@ variable "controller_nodegroup_name" {
   type        = string
 }
 
-variable "karpenter_iam_role_name_prefix_enabled" {
-  description = "Boolean flag to enable/disable using name prefix for karpenter iam role"
-  type        = bool
-  default     = false
-}
 
 ################################################################################
 # Karpenter Controller IAM role
@@ -74,9 +69,33 @@ variable "karpenter_iam_role_override_name" {
   default     = ""
 }
 
+variable "karpenter_iam_role_name_prefix_enabled" {
+  description = "Boolean flag to enable/disable using name prefix for karpenter iam role"
+  type        = bool
+  default     = false
+}
+
 variable "controller_node_iam_role_arn" {
   description = "The node iam role for the initial node group to be used by karpenter"
   type        = string
+}
+
+variable "karpenter_iam_role_policy_enable_override" {
+  description = "Enable/disable override of the karpenter iam role policy name.If this is set to true, the karpenter_iam_role_policy_override_name will be used."
+  type        = bool
+  default     = false
+}
+
+variable "karpenter_iam_role_policy_override_name" {
+  description = "The name of the karpenter iam role policy to be used by karpenter. This will be used only when karpenter_iam_role_policy_enable_override is set to true"
+  type        = string
+  default     = ""
+}
+
+variable "karpenter_iam_role_policy_name_prefix_enabled" {
+  description = "Boolean flag to enable/disable using name prefix for karpenter iam role policy"
+  type        = bool
+  default     = false
 }
 
 variable "existing_karpenter_instance_profile" {

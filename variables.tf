@@ -99,10 +99,16 @@ variable "karpenter_iam_role_policy_enable_override" {
   default     = false
 }
 
-variable "new_karpenter_iam_policy_override_name" {
+variable "karpenter_iam_role_policy_override_name" {
   description = "Override name for the IAM policy created by the new karpenter sub-module. Used only when karpenter_iam_role_enable_override is true. Keeps the new module's policy name separate from the legacy IRSA policy."
   type        = string
   default     = ""
+}
+
+variable "karpenter_iam_role_policy_name_prefix_enabled" {
+  description = "Boolean flag to enable/disable using name prefix for karpenter iam role"
+  type        = bool
+  default     = false
 }
 
 variable "controller_node_iam_role_arn" {

@@ -87,6 +87,24 @@ variable "karpenter_iam_role_override_name" {
   default     = ""
 }
 
+variable "new_karpenter_iam_role_override_name" {
+  description = "Override name for the IAM role created by the new karpenter sub-module. Used only when karpenter_iam_role_enable_override is true. Keeps the new module's role name separate from the legacy IRSA role."
+  type        = string
+  default     = ""
+}
+
+variable "karpenter_iam_role_policy_enable_override" {
+  description = "Enable/disable override of the policy name for the karpenter IAM role"
+  type        = bool
+  default     = false
+}
+
+variable "new_karpenter_iam_policy_override_name" {
+  description = "Override name for the IAM policy created by the new karpenter sub-module. Used only when karpenter_iam_role_enable_override is true. Keeps the new module's policy name separate from the legacy IRSA policy."
+  type        = string
+  default     = ""
+}
+
 variable "controller_node_iam_role_arn" {
   description = "The node iam role for the initial node group to be used by karpenter"
   type        = string

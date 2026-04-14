@@ -57,10 +57,12 @@ module "karpenter" {
 
   # IAM role for the controller
   create_iam_role                   = var.create_karpenter_iam_role
-  iam_role_name                     = var.karpenter_iam_role_enable_override ? var.karpenter_iam_role_override_name : "${var.cluster_name}-karpenter-controller"
+  iam_role_name                     = var.karpenter_iam_role_enable_override ? var.new_karpenter_iam_role_override_name : "${var.cluster_name}-karpenter-controller"
   iam_role_use_name_prefix          = var.karpenter_iam_role_name_prefix_enabled
   iam_role_permissions_boundary_arn = var.karpenter_iam_role_permissions_boundary_arn != "" ? var.karpenter_iam_role_permissions_boundary_arn : null
   iam_role_policies                 = var.karpenter_iam_role_additional_policy_arns
+  iam_policy_name                   = var.karpenter_iam_role_policy_enable_override ? var.new_karpenter_iam_policy_override_name : "${var.cluster_name}-karpenter-controller"
+  iam_policy_use_name_prefix        = var.karpenter_iam_role_name_prefix_enabled
 
   # Re-use the existing node IAM role; skip creating a new one and its access entry
   create_node_iam_role = false

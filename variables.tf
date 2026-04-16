@@ -81,7 +81,7 @@ variable "controller_node_iam_role_arn" {
 }
 
 variable "karpenter_iam_role_policy_enable_override" {
-  description = "Enable/disable override of the karpenter iam role policy name.If this is set to true, the karpenter_iam_role_policy_override_name will be used."
+  description = "Enable/disable override of the karpenter iam role policy name. If this is set to true, the karpenter_iam_role_policy_override_name will be used."
   type        = bool
   default     = false
 }

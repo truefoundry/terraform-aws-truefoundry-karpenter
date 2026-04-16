@@ -95,7 +95,7 @@ variable "karpenter_iam_role_policy_override_name" {
 variable "karpenter_iam_role_policy_name_prefix_enabled" {
   description = "Boolean flag to enable/disable using name prefix for karpenter iam role policy"
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "existing_karpenter_instance_profile" {

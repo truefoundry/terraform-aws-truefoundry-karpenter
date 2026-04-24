@@ -116,6 +116,12 @@ variable "karpenter_iam_role_permissions_boundary_arn" {
   default     = ""
 }
 
+variable "karpenter_enable_inline_policy" {
+  description = "Use an inline role policy (10,240-char limit) instead of a managed policy (6,144-char limit) for the Karpenter controller. Enable this if you hit the PolicySize: 6144 quota error."
+  type        = bool
+  default     = false
+}
+
 ################################################################################
 # SQS
 ################################################################################

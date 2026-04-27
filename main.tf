@@ -28,6 +28,7 @@ module "karpenter" {
   iam_role_policies                 = var.karpenter_iam_role_additional_policy_arns
   iam_policy_name                   = var.karpenter_iam_role_policy_enable_override ? var.karpenter_iam_role_policy_override_name : "${var.cluster_name}-karpenter-controller-policy"
   iam_policy_use_name_prefix        = var.karpenter_iam_role_policy_name_prefix_enabled
+  enable_inline_policy              = var.karpenter_enable_inline_policy
 
   # Re-use the existing node IAM role; skip creating a new one and its access entry
   create_node_iam_role = false

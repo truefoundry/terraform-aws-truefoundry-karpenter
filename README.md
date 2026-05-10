@@ -7,22 +7,24 @@ Truefoundry AWS Karpenter Module
 
 The upstream `terraform-aws-modules/eks//modules/karpenter` module renders the Karpenter controller permissions as a single customer-managed IAM policy. AWS limits these to **6,144 characters**. Recent v21.x releases have grown the policy close to this limit, and long `cluster_name` values (interpolated ~14 times in the document) push it over.
 
-**Fix:** set `karpenter_enable_inline_policy = true` on this module. This switches the policy from a customer-managed policy (6,144-char limit) to an inline role policy (10,240-char limit), giving ~67% more headroom with no other resource changes.
+**Fix:** this module now defaults `karpenter_enable_inline_policy = true`, which switches the policy from a customer-managed policy (6,144-char limit) to an inline role policy (10,240-char limit), giving ~67% more headroom with no other resource changes. To opt out and keep the upstream managed-policy behaviour, set the flag to `false`:
 
 ```hcl
 module "karpenter" {
   source                         = "truefoundry/truefoundry-karpenter/aws"
   # ...
-  karpenter_enable_inline_policy = true
+  karpenter_enable_inline_policy = false # opt out, not recommended
 }
 ```
 
-On an existing deployment, enabling this flag will cause Terraform to:
+### Upgrade note
+
+Existing deployments that previously relied on the old `false` default will, on the next `terraform apply`, see Terraform:
 
 1. **Destroy** `aws_iam_policy.controller[0]` and `aws_iam_role_policy_attachment.controller[0]` (the managed policy and its attachment).
 2. **Create** `aws_iam_role_policy.controller[0]` (the inline policy on the same role).
 
-The role ARN, pod identity association, and outputs are unaffected. Karpenter automatically retries any in-flight EC2 launches during the brief swap.
+The role ARN, pod identity association, and outputs are unaffected. Karpenter automatically retries any in-flight EC2 launches during the brief swap. To avoid the swap entirely, pin `karpenter_enable_inline_policy = false`.
 
 Upstream tracks a structural split into multiple policies in [terraform-aws-modules/terraform-aws-eks#3637](https://github.com/terraform-aws-modules/terraform-aws-eks/issues/3637), deferred to the next major release (v22).
 
@@ -65,7 +67,7 @@ Upstream tracks a structural split into multiple policies in [terraform-aws-modu
 | <a name="input_existing_karpenter_instance_profile"></a> [existing\_karpenter\_instance\_profile](#input\_existing\_karpenter\_instance\_profile) | Instance profile for karpenter. This will be used only when create\_karpenter\_iam\_role is set to false | `string` | `""` | no |
 | <a name="input_k8s_service_account_name"></a> [k8s\_service\_account\_name](#input\_k8s\_service\_account\_name) | The k8s karpenter service account name | `string` | `"karpenter"` | no |
 | <a name="input_k8s_service_account_namespace"></a> [k8s\_service\_account\_namespace](#input\_k8s\_service\_account\_namespace) | The k8s karpenter namespace | `string` | `"kube-system"` | no |
-| <a name="input_karpenter_enable_inline_policy"></a> [karpenter\_enable\_inline\_policy](#input\_karpenter\_enable\_inline\_policy) | Use an inline role policy (10,240-char limit) instead of a managed policy (6,144-char limit) for the Karpenter controller. Enable this if you hit the PolicySize: 6144 quota error. | `bool` | `false` | no |
+| <a name="input_karpenter_enable_inline_policy"></a> [karpenter\_enable\_inline\_policy](#input\_karpenter\_enable\_inline\_policy) | Use an inline role policy (10,240-char limit) instead of a managed policy (6,144-char limit) for the Karpenter controller. Defaults to true to avoid the PolicySize: 6144 quota error that recent upstream versions can hit. | `bool` | `true` | no |
 | <a name="input_karpenter_iam_role_additional_policy_arns"></a> [karpenter\_iam\_role\_additional\_policy\_arns](#input\_karpenter\_iam\_role\_additional\_policy\_arns) | ARNs of additional policies to attach to the karpenter IAM role. For example {'x-policy' = arn:aws:iam::123456789012:policy/x-policy}) | `any` | `{}` | no |
 | <a name="input_karpenter_iam_role_enable_override"></a> [karpenter\_iam\_role\_enable\_override](#input\_karpenter\_iam\_role\_enable\_override) | Enable/disable override of the node iam role for the initial node group to be used by karpenter. If this is set to true, the karpenter\_iam\_role\_override\_name will be used. | `bool` | `false` | no |
 | <a name="input_karpenter_iam_role_name_prefix_enabled"></a> [karpenter\_iam\_role\_name\_prefix\_enabled](#input\_karpenter\_iam\_role\_name\_prefix\_enabled) | Boolean flag to enable/disable using name prefix for karpenter iam role | `bool` | `false` | no |

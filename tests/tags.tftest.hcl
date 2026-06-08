@@ -60,7 +60,36 @@ run "tags_applied" {
   }
 
   assert {
-    condition     = aws_iam_instance_profile.karpenter[0].tags["terraform-module"] == "karpenter"
-    error_message = "Expected terraform-module=karpenter on aws_iam_instance_profile.karpenter"
+    condition     = aws_iam_instance_profile.karpenter[0].tags["truefoundry-terraform-module"] == "karpenter"
+    error_message = "Expected truefoundry-terraform-module=karpenter on aws_iam_instance_profile.karpenter"
+  }
+
+  assert {
+    condition     = aws_iam_instance_profile.karpenter[0].tags["truefoundry-managed"] == "true"
+    error_message = "Expected truefoundry-managed=true on aws_iam_instance_profile.karpenter"
+  }
+}
+
+run "disable_default_tags" {
+  command = plan
+
+  variables {
+    cluster_name                 = "test-cluster"
+    controller_node_iam_role_arn = "arn:aws:iam::123456789012:role/test-node-role"
+    controller_nodegroup_name    = "test-nodegroup"
+    disable_default_tags         = true
+    tags = {
+      "cost-center" = "test-123"
+    }
+  }
+
+  assert {
+    condition     = aws_iam_instance_profile.karpenter[0].tags["cost-center"] == "test-123"
+    error_message = "Expected caller tag cost-center=test-123 on aws_iam_instance_profile.karpenter when disable_default_tags=true"
+  }
+
+  assert {
+    condition     = !contains(keys(aws_iam_instance_profile.karpenter[0].tags), "truefoundry-terraform-module")
+    error_message = "Expected truefoundry-terraform-module to be absent on aws_iam_instance_profile.karpenter when disable_default_tags=true"
   }
 }
